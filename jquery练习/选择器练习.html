@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>11</title>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    </head>
+    <body>
+        <h2>文本隐藏显示</h2>
+        <p>文本文本</p>
+        <button>隐藏</button>
+        <button>显示</button>
+        <h2>父级隐藏</h2>
+        <div class="parenthide">
+            <p class="hideparent">点击隐藏</p>
+            <p>父级隐藏显示文本文本文本</p>
+        </div>
+    </body>
+    <script>
+    $(function(){
+        // 文本隐藏显示
+        // $('button:first').on('click',function(){
+        //     $('p').hide();
+        // })
+        // $('button:last').on('click',function(){
+        //     $('p').show();
+        // })
+
+        // 父级隐藏
+        // $('.hideparent').click(function(){
+        //     $(this).parent('.parenthide').hide('slow');//hide可以带参数  slow  fast  1000(ms)
+        // })
+        // 语法   $(selector).hide(speed,callback);
+        // 父级隐藏添加回调
+        $('.hideparent').click(function(){
+            $(this).parent('.parenthide').hide('1000','swing',function(){
+                alert('父级隐藏')
+            });//hide可以带参数
+        })
+
+        // toggle()  显示隐藏切换
+    })
+    </script>
+    <style>
+        .parenthide{
+            background-color: bisque;
+        }
+    </style>
+</html>

@@ -1,0 +1,63 @@
+<html>
+
+<head>
+<title></title>
+</head>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        div{
+            margin:100px auto;
+            width:400px;
+            height:60px;
+            background:red;
+            overflow:hidden;
+        }
+        ul{
+            width:800px;
+            height:60px;
+            position:relative;
+        }
+        ul>li{
+            float:left;
+            list-style:none;
+            width:100px;
+            height:60px;
+            text-align:center;
+            line-height:60px;
+            background:#d5d5d5;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+        
+        $(function(){
+            var setLeft=0;
+            var timer=setInterval(function(){
+                setLeft+=-6;
+                if(setLeft<=-400){
+                    setLeft=0
+                }
+                $("ul").css('marginLeft',setLeft)    
+            },100)
+        })
+        
+    </script>
+    
+<body>
+    <div>
+        <ul>
+            <li>li1</li>
+            <li>li2</li>
+            <li>li3</li>
+            <li>li4</li>
+            <li>li1</li>
+            <li>li2</li>
+            <li>li3</li>
+            <li>li4</li>
+        </ul>
+    </div>
+</body>
+</html>

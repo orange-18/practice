@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>jquery动画</title>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    </head>
+    <body>
+        <div class="box">large</div>
+        <button>点击添加动画</button>
+    </body>
+    <script>
+        $(function(){
+            $('button').click(function(){
+                $('.box').animate({width:'400px',height:'400px',fontSize:'40px',color:'#fff'},'slow');
+                $('.box').animate({width:'200px',height:'200px',fontSize:'20px',color:'#000'},'slow');
+            })
+        })
+        
+    </script>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: rgb(43, 156, 248);
+        }
+    </style>
+</html>

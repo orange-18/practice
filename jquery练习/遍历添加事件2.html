@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>遍历点击事件2</title>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    </head>
+    <body>
+        <div class="fruit">苹果</div>
+        <div class="fruit">香蕉</div>
+        <div class="fruit">桃子</div>
+    </body>
+    <script>
+    $(function(){
+        $('.fruit').on('click',function(){
+            $(this).css({'color':'red'});
+            $(this).siblings().css({'color':'black'});
+        })
+    })
+    </script>
+</html>

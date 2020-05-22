@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>let，var，暂时性死区，const</title>
+    </head>
+    <body>
+        
+    </body>
+    <script>
+        
+    // 1.let命令
+
+    var a = [];
+    for(var i = 0; i < 10; i ++){
+        a[i] = function(){
+            console.log(i,'i');
+        }
+    }
+    a[6]();//10
+
+    
+    var b = [];
+    for(let j = 0; j < 10; j ++){
+        b[j] = function(){
+            console.log(j,'j');
+        }
+    }
+    b[6]();//6
+
+
+    // 暂时性死区TDZ temporal dead zone
+    // 在代码块内，使用let命令声明变量之前，该变量都是不可用的。这在语法上，称为“暂时性死区”。
+    if(true){
+        console.log('暂时性死区练习');
+
+        // TDZ开始
+        // tmp = 'abc';
+        // console.log(tmp,'tmp1');  //ReferenceError
+
+        // TDZ结束
+        let tmp;
+        console.log(tmp,'tmp2');  //undefined
+
+        // 赋值
+        tmp = 'cba';
+        console.log(tmp,'tmp3');  //cba
+    }
+
+
+    // “暂时性死区”也意味着typeof不再是一个百分之百安全的操作
+
+    typeof x;  //不报错
+
+    // typeof y;
+    // let y;  //ReferenceError
+
+    // 变量一定要在声明后使用
+
+
+    // var m = m;  //不报错
+
+    // let n = n;  //ReferenceError
+
+
+
+    // let不允许在相同作用域内，重复声明同一个变量。
+
+    // es5 var 可以先使用后声明变量
+    // z = 12;
+    // var z;
+    // console.log(z,'z');  // 12
+
+    // let不可以先使用后声明变量
+    // w = 13;
+    // let w;
+    // console.log(w,'z');  // ReferenceError
+
+
+    // 2.块级作用域
+
+    // 变量提升：内层变量可能会覆盖外层变量
+
+    var tmpk = new Date();
+
+    function f() {
+        console.log(tmpk);
+        if (false) {
+            var tmpk = 'hello world';
+        }
+    }
+
+    f(); // undefined
+
+
+    // i泄露成了全局变量
+
+    var s = 'hello';
+
+    for (var i = 0; i < s.length; i++) {
+        console.log(s[i],'s[i]'); // h\e\l\l\o
+    }
+
+    console.log(i,'i'); // 5
+
+    // 内层作用域可以定义外层作用域的同名变量。
+
+    // {{{{
+    //     let insane = 'Hello World';
+    //     {let insane = 'Hello World'}
+    // }}}};
+
+
+    // 块级作用域的出现，实际上使得获得广泛应用的匿名立即执行函数表达式（匿名 IIFE）不再必要了。
+
+    // // IIFE 写法
+    // (function () {
+    //     var tmp = ...;
+    //     ...
+    // }());
+
+    // // 块级作用域写法
+    // {
+    //     let tmp = ...;
+    //     ...
+    // }
+
+
+    // (ES6 的浏览器)
+    // 允许在块级作用域内声明函数。
+    // 函数声明类似于var，即会提升到全局作用域或函数作用域的头部。
+    // 同时，函数声明还会提升到所在的块级作用域的头部。
+
+    // ES6 的块级作用域必须有大括号，如果没有大括号，JavaScript 引擎就认为不存在块级作用域。
+    // let只能出现在当前作用域的顶层。
+    // 函数声明也是如此，严格模式下，函数只能声明在当前作用域的顶层。
+
+
+
+    // 3.const命令
+    // const声明一个只读的常量。一旦声明，常量的值就不能改变。
+    // const声明的变量不得改变值，这意味着，const一旦声明变量，就必须立即初始化，不能留到以后赋值。
+    // const的作用域与let命令相同：只在声明所在的块级作用域内有效。
+    // const命令声明的常量也是不提升，同样存在暂时性死区，只能在声明的位置后面使用。
+    // const声明的常量，也与let一样不可重复声明。
+
+
+    // 4.顶层对象的属性
+    // 顶层对象，在浏览器环境指的是window对象，在 Node 指的是global对象。ES5 之中，顶层对象的属性与全局变量是等价的。
+    // var命令和function命令声明的全局变量，依旧是顶层对象的属性；
+    // let命令、const命令、class命令声明的全局变量，不属于顶层对象的属性。也就是说，从 ES6 开始，全局变量将逐步与顶层对象的属性脱钩。
+
+
+    // 5.globalThis 对象
+    
+    </script>
+</html>

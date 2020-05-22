@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>promise</title>
+    </head>
+    <body>
+        
+    </body>
+    <script>
+
+        // test();
+
+        const promise = new Promise((resolve, reject) => {
+            var timeOut = Math.random() * 2;
+            console.log('set timeout to: ' + timeOut + ' seconds.');
+            setTimeout(function () {
+                if (timeOut < 1) {
+                    console.log('call resolve()...');
+                    // resolve('200 OK');
+                    resolve(value)
+                }else {
+                    console.log('call reject()...');
+                    // reject('timeout in ' + timeOut + ' seconds.');
+                    reject(timeOut);
+                }
+            }, timeOut * 1000);
+        })
+
+        promise.then(function(value){
+            console.log('成功');
+        },function(timeOut){
+            console.log('失败');
+        })
+    
+    </script>
+</html>

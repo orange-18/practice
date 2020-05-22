@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8">
+    <body>
+        <p>请输入10-100之间的数字</p>
+        <input id="demo" type="number">
+        <button type="button" onclick="clickme()">点击</button>
+        <p id="show"></p>
+    </body>
+    <script>
+        function clickme(){
+            var msg,x;
+            msg = document.getElementById('show');
+            msg.innerHTML = '';
+            x = document.getElementById('demo').value;
+            try{
+                if(x == '') throw '值是空的';
+                if(isNaN(x)) throw "值不是数字"
+                if(x < 10) throw "太小";
+                if(x > 100) throw "太大";
+                x = Number(x);
+            }
+            catch(err){
+                msg.innerHTML = "错误：" + err + ".";
+            }
+            finally{
+                document.getElementById('demo').value = '';
+            }
+        }
+    </script>
+</html>

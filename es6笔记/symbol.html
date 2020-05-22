@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        
+    </body>
+
+    <script>
+
+        // symbol是js语言的第7种数据类型
+
+        // let s = Symbol();
+        // console.log(typeof s);  // symbol
+
+        // const sym1 = Symbol('sym1');  // 添加描述 sym1
+        // console.log(String(sym1));  // Symbol(sym1)
+        // console.log(sym1.toString()); // Symbol(sym1)
+        // console.log(sym1.description); // sym1
+
+
+        // 作为属性名
+        let sym2 = Symbol();
+        
+        // 第一种写法
+        let a = {};
+        a[sym2] = 'sym21';
+        console.log(a[sym2]); // sym21
+
+        // 第二种写法
+        let b = {
+            [sym2] : 'sym22'
+        }
+        console.log(b[sym2]); // sym22
+
+        // 第三种写法
+        let c = {};
+        Object.defineProperty(c, sym2, {value: 'sym23'});
+        console.log(c[sym2]);  // sym23
+
+
+        const log = {};
+
+        log.levels = {
+            DEBUG: Symbol('debug'),
+            INFO: Symbol('info'),
+            WARN: Symbol('warn')
+        };
+        console.log(log.levels.DEBUG, 'debug message');
+        console.log(log.levels.INFO, 'info message');
+    
+    </script>
+</html>

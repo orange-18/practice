@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    </head>
+    <body>
+        <div class="g-contation">
+            <ul>
+                 <!-- active1 添加默认效果 -->
+                <li class="m-list-hd active1" id="recommend1">水果</li>
+                <li class="m-list-hd" id="recommend2">零食</li>
+                <li class="m-list-hd" id="recommend3">泡面</li>
+            </ul>
+            <ul>
+                <li class="m-list-bd active2" id="num1">香蕉</li>
+                <li class="m-list-bd" id="num2">辣条</li>
+                <li class="m-list-bd" id="num3">酸菜牛肉</li>
+            </ul>
+        </div>
+    </body>
+    <style type="text/css">
+        li {
+            display: inline-block;
+            padding: 20px;
+            border: 1px solid #ddd;
+            list-style: none;
+        }
+        .m-list-hd.active1 {
+            color: #f00;
+        }
+        .m-list-bd.active2 {
+            color: #fff;
+            background: #f00;
+        }
+    </style>
+    <script>
+    $(document).ready(function() {
+        // 第一步，拿到所有id
+        var $name1 = $('#recommend1'),
+            $name2 = $('#recommend2'),
+            $name3 = $('#recommend3'),
+            $number1 = $('#num1'),
+            $number2 = $('#num2'),
+            $number3 = $('#num3');
+        var listTop = new Array($name1,$name2,$name3);
+        var listBod = new Array($number1,$number2,$number3);
+        
+        // 第二步，添加点击事件
+        $name1.click(function(){
+            setSelectedTime($name1,$number1);
+        });
+        $name2.click(function(){
+            setSelectedTime($name2,$number2);
+        });
+        $name3.click(function(){
+            setSelectedTime($name3,$number3);
+        });
+        
+        // 第三步，绑定事件函数
+        function setSelectedTime(selectedTime,num) {
+            if(selectedTime.hasClass('active1')){
+
+            } else {
+                for (var i = 0; i < listTop.length; i++) {
+                    var time = listTop[i];
+                    if(time.hasClass('active1')) {
+                        time.removeClass('active1');
+                    }
+                }
+                for (var i = 0; i < listBod.length; i++) {
+                    var top = listBod[i];
+                    if(top.hasClass('active2')) {
+                        top.removeClass('active2');
+                    }
+                }
+                // 选中状态
+                selectedTime.addClass('active1');
+                num.addClass('active2');
+            }
+        }
+    })
+    </script>
+</html>

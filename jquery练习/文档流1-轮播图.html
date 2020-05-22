@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>文档流-轮播图</title>
+    </head>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <body>
+        <div class="slide">
+            <ul class="pic-list">
+                <li><img src="../img/meihualu.jpg" alt=""></li>
+                <li><img src="../img/rabbit.jpg" alt=""></li>
+                <li><img src="../img/dabai.jpg" alt=""></li>
+                <li><img src="../img/meihualu.jpg" alt=""></li>
+            </ul>
+            <div class="btn pre">&lt;</div>
+            <div class="btn next">&gt;</div>
+            <ul class="icon-list">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <div class="bottomImg">
+                <ul class="bottomimg-list">
+                    <li class="activeImg"><img src="../img/meihualu.jpg" alt=""></li>
+                    <li><img src="../img/rabbit.jpg" alt=""></li>
+                    <li><img src="../img/dabai.jpg" alt=""></li>
+                </ul>
+            </div>
+        </div>
+    </body>
+    <script>
+    $(function(){
+        var timer;
+        var index = 0;
+        $('.next').click(function(){
+            next();
+        });
+        $('.pre').click(function(){
+            pre();
+        });
+        function next(){
+            index ++;
+            if(index > 2){
+                $('.pic-list').animate({left: -index*600},500);
+                index = 0;
+                $('.pic-list').animate({left:0},0);//图片循环展示 无缝衔接
+            }
+            $('.pic-list').animate({left:-index*600},500);
+            iconHover(index);
+        }
+        function pre(){
+            index --;
+            if(index < 0){
+                index = 2;
+                $('.pic-list').animate({left:-(index+1)*600},0);
+            }
+            $('.pic-list').animate({left:-index*600},500);
+            iconHover(index);
+        }
+        auto();
+        function auto(){
+            timer = setInterval(function(){
+                next();
+            },2000)
+        }
+        $('.slide').mouseover(function(){
+            clearInterval(timer);//鼠标移入清除定时器
+            $('.bottomImg').show(500);
+        });
+        $('.slide').mouseleave(function(){
+            auto();//鼠标移出启动定时器
+            $('.bottomImg').hide(500);
+        });
+        $('.icon-list li').mouseover(function(){
+            index = $(this).index();
+            $('.pic-list').animate({left:-index*600},500);
+            iconHover(index);
+        });
+        function iconHover(index){
+            $('.icon-list li').eq(index).addClass('active').siblings().removeClass('active');
+            $('.bottomimg-list li').eq(index).addClass('activeImg').siblings().removeClass('activeImg');
+        }
+        $('.pre').mouseover(function(){
+            $('.pre').css("color",'green')
+        })
+        $('.pre').mouseleave(function(){
+            $('.pre').css("color",'#666')
+        })
+        $('.next').mouseover(function(){
+            $('.next').css("color",'green')
+        })
+        $('.next').mouseleave(function(){
+            $('.next').css("color",'#666')
+        })
+        $('.bottomimg-list li').mouseover(function(){
+            index = $(this).index();
+            $('.pic-list').animate({left:-index*600},500);
+            iconHover(index);
+            $('.bottomimg-list li').eq(index).addClass('activeImg').siblings().removeClass('activeImg');
+        })
+    })
+    </script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul,li{
+            list-style-type: none;
+        }
+        .slide{
+            width: 600px;
+            height: 400px;
+            overflow: hidden;
+            margin: 100px auto;
+            position: relative;
+        }
+        .slide ul li img{
+            width: 600px;
+            height: 400px;
+        }
+        .pic-list{
+            width: 2400px;
+            height: 400px;
+            position: absolute;
+        }
+        .pic-list li{
+            float: left;
+        }
+        .btn{
+            width: 50px;
+            height: 50px;
+            top: 50%;
+            line-height: 50px;
+            text-align: center;
+            font-size: 25px;
+            background-color: #ffffff;
+            opacity: 0.5;
+            position: absolute;
+            border-radius: 5px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #ccc
+        }
+        .next{
+            right: 0;
+        }
+        .icon-list{
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .icon-list li{
+            width: 10px;
+            height: 10px;
+            background: #ccc;
+            border-radius: 50%;
+            float: left;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        .icon-list .active{
+            background: #fff;
+        }
+        .bottomImg{
+            /* width: 220px; */
+            background-color: rgba(0,0,0,0.5);
+            padding: 10px 10px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 30px;
+            display: none;
+        }
+        .bottomImg ul li img{
+            width: 60px;
+            height: 40px;
+        }
+        .bottomImg ul li{
+            float: left;
+            margin: 0 5px;
+        }
+        .bottomImg .activeImg{
+            border: 2px solid green;
+        }
+    </style>
+
+</html>

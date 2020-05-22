@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+
+        <ul>
+            <li>苹果</li>
+            <li>苹果</li>
+            <li>苹果</li>
+            <li>苹果</li>
+        </ul>
+
+        <ol>
+            <li>苹果</li>
+            <li>苹果</li>
+            <li>苹果</li>
+            <li>苹果</li>
+        </ol>
+
+        <dl>
+            <dt>背景</dt>
+            <dd>123</dd>
+            <dd>345</dd>
+        </dl>
+        
+        <input type="radio" name="sex">女
+        <input type="radio" name="sex">男
+        <br>
+        <label for=""><input type="radio" name="sex" value="">女</label> 
+        <label for=""><input type="radio" name="sex" value="">男</label> 
+        <form action="" method="GET">
+            <label for=""><input type="radio" name="girl" value="">女</label>
+            <label for=""><input type="radio" name="boy" value="">男</label>
+        </form>
+
+    </body>
+    <script>
+
+        // 数据结构set类似于数组，但没有重复的值，成员的值都是唯一的；
+        // set本身是构造函数，用来生成数据结构
+
+        const s = new Set();
+        [1,2,3,4,2,5].forEach(x => s.add(x));
+        for(let i of s){
+            console.log(i); // 1 2 3 4 5
+        }
+
+        const s2 = new Set([2,1,4,5,4]);
+        console.log([...s2]); // [2,1,4,5]
+
+        let s3 = new Set([3,2,4,3]);
+        console.log(s3.add(5).add(4),'s30'); // [3,2,4,5]
+        console.log(s3.has(3),'s31'); // true
+        console.log(s3.has(6),'s32'); // false
+        console.log(s3.clear(),'s33'); // undefined
+
+
+
+        // ES6 提供了 Map 数据结构。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。
+        // 也就是说，Object 结构提供了“字符串—值”的对应，Map 结构提供了“值—值”的对应，是一种更完善的 Hash 结构实现。
+        // 如果你需要“键值对”的数据结构，Map 比 Object 更合适。
+
+        let m1 = new Map();
+        let o = {p:'o1'};
+
+        m1.set(o,'content');
+        console.log(m1.get(o),'m1'); // content
+
+
+        let m2 = new Map([
+            ['name','张三'],
+            ['age','13']
+        ]);
+        console.log(m2.size,'m2.size'); // 2
+        console.log(m2.has('name'),'m2.hasname'); // true
+        console.log(m2.get('name'),'m2.getname'); // 张三
+        console.log(m2.has('age'),'m2.hasage'); // true
+        console.log(m2.get('age'),'m2.getage'); // 13
+
+
+    
+    </script>
+</html>

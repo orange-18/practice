@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+    <div>
+            <button id="leftMove">
+                    《
+                </button>
+            <div class="cWrap">
+                    <div>            
+                                <div>图片一</div>
+                                <div>图片二</div>
+                                <div>图片三</div>
+                                <div>图片四</div>
+                                <div>图片五</div>
+
+                        </div>
+                </div>
+            <button id="rightMove">》</button>
+    </div>
+</body>
+<script>
+    //橱窗左右移动按钮
+
+    //x从0开始，++和--的位置可以规避 可能出现在终点值附近的点击不动情况
+
+    var x = 0;
+    $("#leftMove").click(function () {
+        x++;
+        console.log(x);
+        var p = -200;
+        var xp = x * p + "px";
+        $(".cWrap").children("div").css("margin-left", xp);
+
+        x = x > 3 ? 3 : x;
+    })
+
+    $("#rightMove").click(function () {
+        console.log(x);
+        var p = -200;
+        var xp = x * p + "px";
+        $(".cWrap").children("div").css("margin-left", xp);
+        x--;
+        x = x < 0 ? 0 : x;
+    })
+
+    // 用jq 动画写
+
+    //用jq动画animate设置无法限制终止点，还需要加判定才能设置终点
+    $("#leftMove").click(function () {
+        console.log("x");
+        $(".cWrap").children("div").animate({ marginLeft: '-=200px' }, 500);
+    });
+    $("#rightMove").click(function () {
+        console.log("x");
+        $(".cWrap").children("div").animate({ marginLeft: '+=200px' }, 500);
+    }); 
+</script>
+<style>
+    .cWrap,
+    .cWrap div {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+
+    .cWrap {
+        width: 500px;
+        height: 30px;
+        overflow: hidden;
+    }
+
+    .cWrap>div {
+        width: 1200px;
+        transition: 0.5s all ease;
+    }
+
+    .cWrap>div>div {
+        width: 200px;
+        height: 30px;
+        border: 1px solid black;
+    }
+
+    #leftMove,
+    #rightMove {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+</html>
